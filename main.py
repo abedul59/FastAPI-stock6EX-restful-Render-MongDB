@@ -167,10 +167,4 @@ class S6r202403(BaseModel):
 async def read_item(stock_id: str):
     item = collection.find_one({"cStockID": stock_id})
     return item
-'''
-@app.post("/items/")
-async def create_item(item: Item):
-    item_data = item.dict()
-    item_id = collection.insert_one(item_data).inserted_id
-    return {"item_id": str(item_id)}
-'''
+
