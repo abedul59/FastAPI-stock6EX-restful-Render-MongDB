@@ -1,11 +1,20 @@
 from fastapi import FastAPI
 from pymongo import MongoClient
 from pydantic import BaseModel
-from bson import ObjectId
-
+#from bson import ObjectId
+from fastapi.middleware.cors import CORSMiddleware
 # Create FastAPI app
 app = FastAPI()
-
+origins = [
+    "*",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # MongoDB connection string
 mongo_uri = "mongodb+srv://pyfbsdk59:NHd4ZEVmHONPZiYD@mongodb-restful.5xgpkpw.mongodb.net/?retryWrites=true&w=majority&appName=mongodb-restful"
 
@@ -174,4 +183,7 @@ async def read_item(item_id: str):
     item = collection.find_one({"cStockID": item_id}, {'_id': 0})
     return item
 
+
+#https://stackoverflow.com/questions/63881516/objectid-object-is-not-iterable-error-while-fetching-data-from-mongodb-atlas
 #result = collection.find_one({'OpportunityID': oppid}, {'_id': 0})
+#Exclude the "_id" from the output.
