@@ -161,10 +161,16 @@ class S6r202403(BaseModel):
   cf9: str  
   cf10: str
 
-
+'''
 # Routes
 @app.get("/s6r202403/{stock_id}")
 async def read_item(stock_id: str):
     item = collection.find_one({"cStockID": stock_id})
+    return item
+'''
+# Routes
+@app.get("/s6r202403/{item_id}")
+async def read_item(item_id: str):
+    item = collection.find_one({"cStockID": item_id})
     return item
 
