@@ -171,6 +171,7 @@ async def read_item(stock_id: str):
 # Routes
 @app.get("/s6r202403/{item_id}")
 async def read_item(item_id: str):
-    item = collection.find_one({"cStockID": item_id})
+    item = collection.find_one({"cStockID": item_id}, {'_id': 0})
     return item
 
+#result = collection.find_one({'OpportunityID': oppid}, {'_id': 0})
